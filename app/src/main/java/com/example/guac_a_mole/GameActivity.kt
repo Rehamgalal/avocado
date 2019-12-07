@@ -53,7 +53,7 @@ var t:CountDownTimer?=null
     override fun onResume() {
         super.onResume()
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-     t=  object :CountDownTimer(120000, 1000) {
+     t=  object :CountDownTimer(15000, 1000) {
             override fun onFinish() {
                 val intent= Intent(this@GameActivity,ResultsActivity::class.java)
                 intent.putExtra("name",userName)
@@ -65,9 +65,9 @@ var t:CountDownTimer?=null
                 if (p0 < 10000L){
                     timer.setTextColor(Color.RED)
                     if (timer.visibility== View.VISIBLE){
-                        timer.visibility== View.GONE
+                        timer.visibility= View.GONE
                     }else{
-                        timer.visibility== View.VISIBLE
+                        timer.visibility=View.VISIBLE
                     }
                 }
                 val minutes = (p0 / 1000)  / 60

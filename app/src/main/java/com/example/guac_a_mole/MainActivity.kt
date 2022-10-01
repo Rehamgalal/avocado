@@ -10,17 +10,19 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-start.setOnClickListener {
-    val name:String
-    if(username.text.toString().equals("")){
-        name= "..."
-    }else{
-        name= username.text.toString()
+        attachListeners()
     }
-    val intent= Intent(this, GameActivity::class.java)
-    intent.putExtra("name",name)
-    startActivity(intent)
-}
 
+    private fun attachListeners() {
+        start.setOnClickListener {
+            val name: String = if (username.text.toString().isNotEmpty()) {
+                "..."
+            } else {
+                username.text.toString()
+            }
+            val intent = Intent(this, GameActivity::class.java)
+            intent.putExtra(GameActivity.USER_NAME_KEY, name)
+            startActivity(intent)
+        }
     }
 }

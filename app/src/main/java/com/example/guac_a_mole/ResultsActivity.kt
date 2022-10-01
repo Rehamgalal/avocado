@@ -7,18 +7,35 @@ import kotlinx.android.synthetic.main.activity_results.*
 
 class ResultsActivity : AppCompatActivity() {
 
+    var userName: String? = null
+    var playerScore: Int? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_results)
-        val name=intent.getStringExtra("name")
-        username.text=name
-        val scorenum = intent.getIntExtra("score",0)
+        setData()
+        setupView()
+        attachListeners()
+    }
 
-        score.text=scorenum.toString()
+    private fun setData() {
+        userName = intent.getStringExtra(GameActivity.USER_NAME_KEY)
+        playerScore = intent.getIntExtra(PLAYER_SCORE_KEY, 0)
+    }
+
+    private fun setupView() {
+        username.text = userName
+        score.text = playerScore.toString()
+    }
+
+    private fun attachListeners() {
         start.setOnClickListener {
-            val intent= Intent(this, GameActivity::class.java)
-            intent.putExtra("name",name)
+            val intent = Intent(this, GameActivity::class.java)
+            intent.putExtra(GameActivity.USER_NAME_KEY, playerScore)
             startActivity(intent)
         }
+    }
+
+    companion object {
+        const val PLAYER_SCORE_KEY = "score"
     }
 }
